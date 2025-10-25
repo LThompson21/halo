@@ -2,24 +2,20 @@
 #define HALO__HALO
 
 #include <string>
-#include "halo/version.hpp"
 
 #if defined(_WIN32)
-  #if defined(HALO_BUILD)
-    #define HALO_DEF __declspec(dllexport)
-  #else
-    #define HALO_DEF __declspec(dllimport)
-  #endif
+#if defined(HALO_BUILD)
+  #define HALO_DEF __declspec(dllexport)
 #else
-  #define HALO_DEF
+  #define HALO_DEF __declspec(dllimport)
+#endif
+#else
+#define HALO_DEF
 #endif
 
 namespace halo
 {
-    HALO_DEF inline std::string Version()
-    {
-        return HALO_VERSION;
-    } 
+  HALO_DEF std::string Version();
 }
 
 #endif //HALO__HALO
