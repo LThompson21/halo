@@ -1,2 +1,42 @@
-./.vscode
-./out
+# Build trees
+/build*/ 
+/build/ 
+/out/ 
+/bin/ 
+/obj/ 
+/.cache/
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+CTestTestfile.cmake
+Makefile
+*.cmake
+
+# Meson
+/meson-*/ 
+/builddir/ 
+/compile_commands.json
+
+# Compiled objects
+*.o
+*.obj
+*.lo
+*.la
+*.a
+*.so*
+*.dylib
+*.dll
+*.exe
+*.pdb
+
+# IDE/editor
+.vscode/
+.idea/
+.vs/
+
+# OS
+.DS_Store
+Thumbs.db
