@@ -1,4 +1,3 @@
-# .clang-format
 BasedOnStyle: LLVM
 Language: Cpp
 
@@ -38,15 +37,15 @@ AllowShortIfStatementsOnASingleLine: AllIfsAndElse
 AllowShortLoopsOnASingleLine: true
 AllowShortCaseLabelsOnASingleLine: true
 AllowShortBlocksOnASingleLine: Empty
-AllowShortFunctionsOnASingleLine: All   # <- enables true one-liners like { return x; }
+AllowShortFunctionsOnASingleLine: All   # enables true one-liners like { return x; }
 InsertBraces: false
 
 # --- Wrapping / alignment ---
-ColumnLimit: 120               # needed so long arg lists can wrap
-BinPackArguments: false        # when wrapping, put one arg per line
+ColumnLimit: 120
+BinPackArguments: false
 BinPackParameters: false
-AlignAfterOpenBracket: Align   # align to first argument
-PenaltyBreakBeforeFirstCallParameter: 1  # encourage breaking before first arg once long
+AlignAfterOpenBracket: Align
+PenaltyBreakBeforeFirstCallParameter: 1
 PenaltyBreakString: 50
 
 # --- Alignment ---
@@ -84,3 +83,10 @@ IncludeCategories:
     SortPriority: 8
 
 IncludeIsMainRegex: '([-_A-Za-z0-9]+)\.(h|hh|hpp|hxx)'
+
+# --- Padding & access labels (added) ---
+KeepEmptyLinesAtTheStartOfBlocks: true
+MaxEmptyLinesToKeep: 1
+EmptyLineBeforeAccessModifier: LogicalBlock
+AccessModifierOffset: -1
+IndentAccessModifiers: false
