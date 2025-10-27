@@ -15,7 +15,9 @@
 
 namespace halo
 {
+
 HALO_DEF std::string Version();
+
 }
 
 #endif // HALO__HALO
