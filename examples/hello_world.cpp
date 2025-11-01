@@ -1,6 +1,5 @@
 #include <cstdlib>
 #include <iostream>
-#include <thread>
 
 #include <halo/halo.hpp>
 
