@@ -6,20 +6,12 @@
 #include <thread>
 
 #include "halo/halo.hpp"
+#include "halo/private/internal.h"
 #include "halo/version.hpp"
 
-namespace halo
-{
 
-struct HaloLib
-{
-    std::thread::id main_thread; // initialized in DllMain, used to ensure that all calls to core lib functions are from
-                                 // the main thread
-    bool is_init{ false };
-    std::string last_error{ "NONE" }; // store last error for halo::GetError()
-} HALO_LIB;
-
-} // namespace halo
+// define halo internal state
+halo::HaloLib halo::HALO_LIB;
 
 auto halo::Version() -> std::string { return HALO_VERSION; }
 

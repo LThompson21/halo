@@ -38,9 +38,9 @@ add_library(halo::halo ALIAS halo)
 # NOTE: generated goes PUBLIC because a public header may include it
 target_include_directories(halo
   PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/public/>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/generated>
-    $<INSTALL_INTERFACE:include>
+    $<INSTALL_INTERFACE:include/public/>
   PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include/private
 )
