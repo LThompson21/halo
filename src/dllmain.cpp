@@ -2,21 +2,9 @@
 
 #include <thread>
 
+#include "halo/private/internal.h"
+
 #if defined( HALO_BUILD )
-
-namespace halo
-{
-
-// typedef to ensure HALO_LIB can be modified in DllMain
-struct HaloLib
-{
-    std::thread::id main_thread; // initialized in DllMain, used to ensure that all calls to core lib functions are from
-                                 // the main thread
-    bool is_init{ false };
-};
-extern HaloLib HALO_LIB;
-
-} // namespace halo
 
 // #include "halo/version.hpp"
 

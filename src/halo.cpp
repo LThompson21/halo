@@ -9,7 +9,6 @@
 #include "halo/private/internal.h"
 #include "halo/version.hpp"
 
-
 // define halo internal state
 halo::HaloLib halo::HALO_LIB;
 
