@@ -1,2 +1,23 @@
 CompileFlags:
-  CompilationDatabase: out
+  CompilationDatabase: '${WorkspaceFolder}/out'
+  Add: [
+    "-std=c++23",
+    "-Wall",
+    "-Wextra",
+    "-Wno-unused-parameter"
+  ]
+
+Diagnostics:
+  ClangTidy:
+    Add: ["modernize-*", "performance-*", "readability-*", "clang-analyzer-*"]
+    Remove: [readability-identifier-length]
+
+Hover:
+  ShowAKA: true
+
+Index:
+  Background: Build
+
+InlayHints:
+  ParameterNames: Yes
+  DeducedTypes: Yes

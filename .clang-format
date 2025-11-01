@@ -2,9 +2,9 @@ BasedOnStyle: LLVM
 Language: Cpp
 
 # --- Indentation / tabs ---
-IndentWidth: 3
-ContinuationIndentWidth: 3
-TabWidth: 3
+IndentWidth: 4
+ContinuationIndentWidth: 4
+TabWidth: 4
 UseTab: Never
 
 # --- Parens spacing ---
@@ -18,9 +18,9 @@ SpaceBeforeParens: ControlStatements
 BreakBeforeBraces: Custom
 BraceWrapping:
   AfterClass: true
-  AfterControlStatement: true
+  AfterControlStatement: false   # was: true  → allow one-line { ... } after if/while/for
   AfterEnum: true
-  AfterFunction: true          # newline for normal functions
+  AfterFunction: true            # newline for normal functions
   AfterNamespace: true
   AfterStruct: true
   AfterUnion: true
@@ -30,14 +30,14 @@ BraceWrapping:
   SplitEmptyFunction: false
   SplitEmptyRecord: false
   SplitEmptyNamespace: false
-SpaceInEmptyBlock: false       # "{}" not "{ }"
+SpaceInEmptyBlock: false
 
 # --- Keep short/no-brace statements on one line ---
 AllowShortIfStatementsOnASingleLine: AllIfsAndElse
 AllowShortLoopsOnASingleLine: true
 AllowShortCaseLabelsOnASingleLine: true
-AllowShortBlocksOnASingleLine: Empty
-AllowShortFunctionsOnASingleLine: All   # enables true one-liners like { return x; }
+AllowShortBlocksOnASingleLine: Always   # was: Empty → enables `{ return true; }` on one line
+AllowShortFunctionsOnASingleLine: All
 InsertBraces: false
 
 # --- Wrapping / alignment ---
@@ -84,7 +84,7 @@ IncludeCategories:
 
 IncludeIsMainRegex: '([-_A-Za-z0-9]+)\.(h|hh|hpp|hxx)'
 
-# --- Padding & access labels (added) ---
+# --- Padding & access labels ---
 KeepEmptyLinesAtTheStartOfBlocks: true
 MaxEmptyLinesToKeep: 1
 EmptyLineBeforeAccessModifier: LogicalBlock

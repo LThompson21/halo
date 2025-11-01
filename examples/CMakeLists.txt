@@ -35,15 +35,6 @@ function(halo_example name)
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 
-  # On Windows, copy dependent DLLs (e.g., halo.dll) next to the EXE
-  if(WIN32)
-    add_custom_command(TARGET ${_tgt} POST_BUILD
-      COMMAND ${CMAKE_COMMAND} -E copy_if_different
-              $<TARGET_RUNTIME_DLLS:${_tgt}> $<TARGET_FILE_DIR:${_tgt}>
-      COMMAND_EXPAND_LISTS
-    )
-  endif()
-
   # Optional: group in IDEs
   set_property(TARGET ${_tgt} PROPERTY FOLDER "examples")
 endfunction()

@@ -1,10 +1,11 @@
 #include <cstdlib>
 #include <iostream>
+#include <thread>
 
 #include <halo/halo.hpp>
 
-int main()
+auto main() -> int
 {
-   std::cout << "Hello " << halo::Version();
-   return EXIT_SUCCESS;
+    std::cout << "Hello HALO " << halo::Version() << "\n";
+    return EXIT_SUCCESS;
 }
