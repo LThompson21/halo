@@ -23,6 +23,11 @@ auto halo::IsMainThread( std::thread::id *current_thread ) -> bool
 
 auto halo::Init() -> bool
 {
+    if ( !HALO_LIB.is_setup ) {
+        halo::SetErrorFmt( "\"halo/main.hpp\" was not included! Please include it in exactly 1 TU" );
+        return false;
+    }
+
     // Check for correct thread
 
     if ( std::thread::id tried; !halo::IsMainThread( &tried ) ) {
@@ -43,8 +48,11 @@ auto halo::WasInit() -> bool { return halo::HALO_LIB.is_init; }
 
 auto halo::Terminate() -> bool
 {
+    if ( !HALO_LIB.is_setup ) {
+        halo::SetErrorFmt( "\"halo/main.hpp\" was not included! Please include it in exactly 1 TU" );
+        return false;
+    }
     // Check for correct thread
-
     if ( std::thread::id tried; !halo::IsMainThread( &tried ) ) {
         const auto main_tid = std::hash<std::thread::id>{}( HALO_LIB.main_thread );
         const auto tried_tid = std::hash<std::thread::id>{}( tried );

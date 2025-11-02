@@ -1,0 +1,14 @@
+#pragma once
+
+// Random hex suffix emitted by CMake (just digits/abcdef)
+#define HALO_SETUP_SUFFIX @HALO_SETUP_SUFFIX@
+
+// Token-paste "halo__setup_" with the suffix to form a valid identifier.
+#define HALO_PP_JOIN_( a, b ) a##b
+#define HALO_PP_JOIN( a, b ) HALO_PP_JOIN_( a, b )
+
+#define HALO_SETUP HALO_PP_JOIN( halo__setup_, HALO_SETUP_SUFFIX )
+
+// Optional: helper to stringify macros (handy for debug messages)
+#define HALO_STR_( x ) #x
+#define HALO_STR( x ) HALO_STR_( x )

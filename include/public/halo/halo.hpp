@@ -12,13 +12,16 @@ namespace halo
 // Returns the current version of halo, see <halo/version.hpp>
 HALO_API auto Version() -> std::string;
 
+// Returns true if called from the main thread.
+// Considered the main if it loaded the Halo DLL
 HALO_API auto IsMainThread( std::thread::id *current_thread = nullptr ) -> bool;
 
-// Setup necessary state for applications
+// Setup necessary state for applications.
+// Must be called from the Main thread
 HALO_API auto Init() -> bool;
 // Get whether halo is already init
 HALO_API auto WasInit() -> bool;
-// Terminate the lib
+// Terminate the lib. Must be called from the main thread
 HALO_API auto Terminate() -> bool;
 
 // Get the last error found by halo

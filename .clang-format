@@ -73,10 +73,10 @@ IncludeCategories:
     Priority: 5
     SortPriority: 5
   - Regex: '^(<|")(halo/.*)("?>)$'
-    Priority: 6
-    SortPriority: 6
-  - Regex: '^(<|")(private/.*)("?>)$'
     Priority: 7
+    SortPriority: 6
+  - Regex: '^(<|")(halo/private/.*)("?>)$'
+    Priority: 6
     SortPriority: 7
   - Regex: '.*'
     Priority: 8

@@ -30,6 +30,8 @@ set(BUILD_SHARED_LIBS ON CACHE BOOL "Build shared libs" FORCE)
 # Force a shared lib regardless of BUILD_SHARED_LIBS
 add_library(halo SHARED
   src/halo.cpp
+  src/dllmain.cpp
+  src/setup.cpp
 )
 
 add_library(halo::halo ALIAS halo)
@@ -68,7 +70,15 @@ set(HALO_VERSION_STR "${PROJECT_VERSION}")
 configure_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/cmake/version.hpp.in
   ${CMAKE_CURRENT_BINARY_DIR}/generated/halo/version.hpp
-  @ONLY
+)
+
+string(RANDOM LENGTH 16 ALPHABET 0123456789abcdef HALO_SETUP_SUFFIX)
+# DO NOT QUOTE THIS:
+set(HALO_SETUP_SUFFIX ${HALO_SETUP_SUFFIX})
+
+configure_file(
+  ${CMAKE_CURRENT_SOURCE_DIR}/cmake/setup_name.hpp.in
+  ${CMAKE_CURRENT_BINARY_DIR}/generated/halo/setup_name.hpp
 )
 
 # -------- Output dirs (nice for local dev) --------
@@ -112,29 +122,25 @@ export(PACKAGE halo)
 
 # ---- Auto-copy runtime DLLs for every executable (Windows, shared builds) ----
 function(halo__auto_copy_runtime_dlls)
-  if(NOT WIN32 OR NOT BUILD_SHARED_LIBS)
-    return()
+  if(WIN32 AND BUILD_SHARED_LIBS)
+    get_property(_allTargets GLOBAL PROPERTY TARGETS)
+    foreach(t IN LISTS _allTargets)
+      get_target_property(_type "${t}" TYPE)
+      if(_type STREQUAL "EXECUTABLE")
+        add_custom_command(TARGET "${t}" POST_BUILD
+          COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                  $<TARGET_RUNTIME_DLLS:${t}>
+                  $<TARGET_FILE_DIR:${t}>
+          COMMAND_EXPAND_LISTS
+        )
+      endif()
+    endforeach()
   endif()
-
-  # Iterate all targets and attach a post-build copy to executables.
-  get_property(_allTargets GLOBAL PROPERTY TARGETS)
-  foreach(t IN LISTS _allTargets)
-    get_target_property(_type ${t} TYPE)
-    if(_type STREQUAL "EXECUTABLE")
-      # Copies all DLLs this exe depends on (including halo.dll) next to the exe.
-      add_custom_command(TARGET ${t} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-                $<TARGET_RUNTIME_DLLS:${t}>
-                $<TARGET_FILE_DIR:${t}>
-        COMMAND_EXPAND_LISTS
-      )
-    endif()
-  endforeach()
 endfunction()
 
-# Run after the whole project is defined so every exe is seen.
+# Defer until all targets exist
+# Enforce dll and #include <halo/main.hpp>
 cmake_language(DEFER CALL halo__auto_copy_runtime_dlls)
-
 
 # -------- (Optional) Install rules --------
 # If/when you want to install:
