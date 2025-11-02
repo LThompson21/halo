@@ -18,7 +18,7 @@ extern "C" void halo__user_entry_present( void );
 extern "C" void halo__user_entry_present( void ) {} // one TU only
 
 // --- Public declaration of the user's real entry point ---------------------
-#include "halo/setup_name.hpp" // HALO_SETUP
+#include "halo/setup_name.hpp" // HALO_SETUP macro
 extern "C" void HALO_SETUP();  // imported from DLL
 namespace halo
 {
